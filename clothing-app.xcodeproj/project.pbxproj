@@ -94,6 +94,9 @@
 		BD1E53832BA1E9520003EDF1 /* clothing-app */ = {
 			isa = PBXGroup;
 			children = (
+				BD1E53B02BA1F4420003EDF1 /* Views */,
+				BD1E53AF2BA1F4310003EDF1 /* ModelViews */,
+				BD1E53AE2BA1F4200003EDF1 /* Models */,
 				BD1E53842BA1E9520003EDF1 /* clothing_appApp.swift */,
 				BD1E53862BA1E9520003EDF1 /* ContentView.swift */,
 				BD1E53882BA1E9540003EDF1 /* Assets.xcassets */,
@@ -125,6 +128,27 @@
 				BD1E53A12BA1E9540003EDF1 /* clothing_appUITestsLaunchTests.swift */,
 			);
 			path = "clothing-appUITests";
+			sourceTree = "<group>";
+		};
+		BD1E53AE2BA1F4200003EDF1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BD1E53AF2BA1F4310003EDF1 /* ModelViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModelViews;
+			sourceTree = "<group>";
+		};
+		BD1E53B02BA1F4420003EDF1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
