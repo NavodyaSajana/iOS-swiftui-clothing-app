@@ -6,3 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
+
+class HomeViewModel : ObservableObject{
+    @Published var searchString : String = ""
+    @Published var categoryData = sampleCategoryData
+    
+}
