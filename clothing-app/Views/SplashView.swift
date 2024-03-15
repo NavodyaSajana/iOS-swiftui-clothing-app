@@ -9,7 +9,14 @@ import SwiftUI
 
 struct SplashView: View {
     var body: some View {
-        Text("Clothing app Splash Screen\nHello There!")
+        NavigationStack
+        {
+            VStack{
+                Text("Hello Clothing App")
+                NavigationLink("Click Here", destination: HomeView())
+            }
+            .padding()
+        }
     }
 }
 
