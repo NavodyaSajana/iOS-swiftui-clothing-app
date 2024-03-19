@@ -15,6 +15,7 @@
 		BD1E53A02BA1E9540003EDF1 /* clothing_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1E539F2BA1E9540003EDF1 /* clothing_appUITests.swift */; };
 		BD1E53A22BA1E9540003EDF1 /* clothing_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1E53A12BA1E9540003EDF1 /* clothing_appUITestsLaunchTests.swift */; };
 		BD1E53B42BA1F91C0003EDF1 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1E53B32BA1F91C0003EDF1 /* SplashView.swift */; };
+		BD4E065C2BAA169700C55BA7 /* ClothingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4E065B2BAA169700C55BA7 /* ClothingCardView.swift */; };
 		BD75E46F2BA49B2D007B12AC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD75E46E2BA49B2D007B12AC /* HomeViewModel.swift */; };
 		BD75E4712BA4C005007B12AC /* HomeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD75E4702BA4C005007B12AC /* HomeDataModel.swift */; };
 		BDC38AD12BA344C5006FC80F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC38AD02BA344C5006FC80F /* HomeView.swift */; };
@@ -49,6 +50,7 @@
 		BD1E539F2BA1E9540003EDF1 /* clothing_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clothing_appUITests.swift; sourceTree = "<group>"; };
 		BD1E53A12BA1E9540003EDF1 /* clothing_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clothing_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BD1E53B32BA1F91C0003EDF1 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		BD4E065B2BAA169700C55BA7 /* ClothingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingCardView.swift; sourceTree = "<group>"; };
 		BD75E46E2BA49B2D007B12AC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "clothing-app/HomeViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		BD75E4702BA4C005007B12AC /* HomeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataModel.swift; sourceTree = "<group>"; };
 		BDC38AD02BA344C5006FC80F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				BD1E53B32BA1F91C0003EDF1 /* SplashView.swift */,
 				BDC38AD02BA344C5006FC80F /* HomeView.swift */,
+				BD4E065B2BAA169700C55BA7 /* ClothingCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				BD1E53852BA1E9520003EDF1 /* clothing_appApp.swift in Sources */,
 				BD75E46F2BA49B2D007B12AC /* HomeViewModel.swift in Sources */,
 				BD1E53B42BA1F91C0003EDF1 /* SplashView.swift in Sources */,
+				BD4E065C2BAA169700C55BA7 /* ClothingCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
