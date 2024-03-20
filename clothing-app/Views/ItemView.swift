@@ -1,27 +1,22 @@
 //
-//  HomeView.swift
+//  ItemView.swift
 //  clothing-app
 //
-//  Created by Sajana Rupasinghe on 2024-03-14.
+//  Created by Sajana Rupasinghe on 2024-03-20.
 //
 
 import SwiftUI
 
-struct HomeView: View {
+struct ItemView: View {
     
-    
-    @StateObject var homeVM : HomeViewModel = HomeViewModel()
-    
+    @StateObject var itemVM : ItemViewModel = ItemViewModel()
     
     var body: some View {
         
         //var searchText: String="null"
         ZStack{
             VStack(spacing: 20){
-                //Welcome band
-                HStack{//the welcome note and the cart icon
-                    
-                    
+                HStack{//Navigator Item
                     RoundedRectangle(cornerRadius: 0)
                         .frame(width: 330,height: 40)
                         .padding(.horizontal,10)
@@ -30,8 +25,7 @@ struct HomeView: View {
                             HStack{
                                 HStack{
                                     VStack{
-                                        Text("Hello Welcome!").font(.custom("SF Armenian",size: 15))
-                                        Text("Sajana Rupasinghe").bold()
+                                        Text("\(itemVM.searchCategory) items").bold()
                                     }
                                 }
                                 Spacer()
@@ -40,8 +34,8 @@ struct HomeView: View {
                                         .foregroundColor(.black)
                                 }
                             }
+                            .padding(.horizontal)
                         }
-                    
                 }
                 
                 HStack{//Item Search bar
@@ -52,37 +46,8 @@ struct HomeView: View {
                         .overlay{
                             HStack{
                                 Image(systemName: "magnifyingglass")
-                                TextField("What are you looking for...",text: $homeVM.searchString)
+                                TextField("Search in all over the Items...",text: $itemVM.searchString)
                             }.padding(.horizontal,48)
-                        }
-                }
-                
-                HStack{//Message with Image (discounts, downtimes, etc...)
-                    RoundedRectangle(cornerRadius: 10)
-                        .padding(.horizontal, 10)
-                        .frame(height:135)
-                        .foregroundColor(Color("DefaultRectangleBg"))
-                        .overlay{
-                            HStack{
-                                HStack{
-                                    RoundedRectangle(cornerRadius: 0)
-                                        .frame(maxHeight: .infinity)
-                                        .opacity(0)
-                                        .overlay{
-                                            VStack{
-                                                Text("Discount")
-                                                Text("Discount")
-                                                Text("Discount")
-                                            }
-                                            
-                                        }
-                                }
-                                HStack{
-                                    RoundedRectangle(cornerRadius: 0)
-                                        .frame(maxHeight: .infinity)
-                                }
-                            }.padding(.horizontal,35)
-                            
                         }
                 }
                 
@@ -94,7 +59,7 @@ struct HomeView: View {
                         .overlay{
                             ScrollView(.horizontal){
                                 LazyHStack{
-                                        ForEach(homeVM.categoryData,id:\.self){
+                                        ForEach(itemVM.categoryData,id:\.self){
                                             category in
                                             RoundedRectangle(cornerRadius: 10)
                                                 .frame(width: 90,height: 30)
@@ -113,7 +78,7 @@ struct HomeView: View {
                 
                 ScrollView{// Show Popular items over here
                     VStack{
-                        ForEach(homeVM.clothingData,id:\.self){
+                        ForEach(itemVM.clothingData,id:\.self){
                             cloth in
                             VStack{
                                 HStack(spacing: 20){
@@ -134,20 +99,14 @@ struct HomeView: View {
                 }
                 
                 Spacer()
-               
+                
             }
             .padding(.top)
             .preferredColorScheme(.light)
             
         }
-        
     }
-    
-    
 }
-
-
-
 #Preview {
-    HomeView()
+    ItemView()
 }

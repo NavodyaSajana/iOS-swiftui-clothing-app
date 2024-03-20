@@ -17,7 +17,7 @@ struct ClothingCardView : View {
         VStack{
             Image(systemName: imageName)
                 .resizable()
-                .frame(width: 150, height: 200)
+                .frame(width: 150, height: 180)
                 .aspectRatio(contentMode: .fit)
             Text(name)
                 .font(.headline)
