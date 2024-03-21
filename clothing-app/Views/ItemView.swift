@@ -78,12 +78,12 @@ struct ItemView: View {
                 
                 ScrollView{// Show Popular items over here
                     VStack{
-                        ForEach(itemVM.clothingData,id:\.self){
+                        ForEach(itemVM.itemData,id:\.self){
                             cloth in
                             VStack{
                                 HStack(spacing: 20){
-                                    ClothingCardView(imageName :cloth.imageName,name :cloth.name,price:cloth.price)
-                                    ClothingCardView(imageName :cloth.imageName,name :cloth.name,price:cloth.price)
+                                    ClothingCard(itemDM: cloth)
+                                    ClothingCard(itemDM: cloth)
                                 }
                             }
                         }

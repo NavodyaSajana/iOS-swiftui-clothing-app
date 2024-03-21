@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct CartView: View {
-    
-    @StateObject var cartVM : CartViewModel = CartViewModel()
+    @EnvironmentObject var cartVM : CartViewModel
     
     var body: some View {
         ZStack{
@@ -26,9 +25,13 @@ struct CartView: View {
                         .overlay{
                             ScrollView{
                                 VStack{
-                                    ForEach(cartVM.cartData,id:\.self){
-                                        data in
-                                        CartItemCardView(imageName: data.image, name: data.name, price: data.price, quantity: data.quantity, size: data.size)
+                                    if cartVM.items.count > 0 {
+                                        ForEach(cartVM.items,id:\.self){
+                                            data in
+                                            CartItemCard(itemDM: data)
+                                        }
+                                    } else {
+                                        Text("Your Cart is Empty")
                                     }
                                 }
                                 .padding()
@@ -36,6 +39,26 @@ struct CartView: View {
                         }
                 }
                 Spacer()
+                
+                VStack{
+                    HStack{
+                        Text("Total")
+                        Spacer()
+                        Text("\(cartVM.total, specifier: "%.2f") $")
+                    }
+                    HStack{
+                        Text("Discount")
+                        Spacer()
+                        Text("0.00 $")
+                    }
+                    Spacer()
+                    //1 Spacer()
+                    HStack{
+                        Text("Amount")
+                        Spacer()
+                        Text("\(cartVM.total, specifier: "%.2f") $")
+                    }
+                }.padding(.horizontal,20)
                 
                 
                 Button(action:{},label: {
@@ -64,4 +87,5 @@ struct CartView: View {
 
 #Preview {
     CartView()
+        .environmentObject(CartViewModel())
 }

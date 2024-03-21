@@ -11,5 +11,4 @@ import SwiftUI
 class HomeViewModel : ObservableObject{
     @Published var searchString : String = ""
     @Published var categoryData = sampleCategoryData
-    @Published var clothingData = sampleClothingData
 }
