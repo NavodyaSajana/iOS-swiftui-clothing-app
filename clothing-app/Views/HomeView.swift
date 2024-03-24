@@ -38,13 +38,14 @@ struct HomeView: View {
                                         }
                                     }
                                     Spacer()
-                                    NavigationLink{
+                                    NavigationLink(destination:{
+                                        //EmptyView()
                                         CartView()
                                             .environmentObject(cartVM)
-                                    } label: {
+                                            .toolbar(.hidden, for:.tabBar)
+                                    },label: {
                                         CartButton(numberOfProducts: cartVM.items.count)
-                                    }
-                                    
+                                    })                                    
                                 }
                             }
                         
@@ -128,22 +129,17 @@ struct HomeView: View {
                         }
                     }
                     
-                    HStack(spacing: 80){//Navigator
-                        Image(systemName: "house.fill")
-                        Image(systemName: "heart")
-                        Image(systemName: "bell")
-                        Image(systemName: "person")
-                    }
-                    
-                    Spacer()
+
                     
                 }
                 .padding(.top)
                 .preferredColorScheme(.light)
+                .frame(alignment: .bottom)
+                Spacer()
                 
             }
+            //.toolbar(.hidden, for: .navigationBar)
         }
-        
     }
     
     
