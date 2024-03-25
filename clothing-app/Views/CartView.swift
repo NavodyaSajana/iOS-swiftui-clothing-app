@@ -18,30 +18,33 @@ struct CartView: View {
                     Text("Cart").bold()
                     // }
                     
-                    
+                    Spacer()
                     VStack{
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 370,height: 500)
-                            .foregroundColor(Color("DefaultRectangleBg"))
-                            .overlay{
-                                ScrollView{
-                                    VStack{
-                                        if cartVM.items.count > 0 {
-                                            ForEach(cartVM.items,id:\.self){
-                                                data in
-                                                CartItemCard(itemDM: data)
-                                            }
-                                        } else {
-                                            Text("Your Cart is Empty")
-                                        }
+                        List{
+                            //VStack{
+                                if cartVM.items.count > 0 {
+                                    ForEach(cartVM.items,id:\.self){
+                                        data in
+                                        CartItemCard(itemDM: data)
                                     }
-                                    .padding()
+                                } else {
+                                    Text("Your Cart is Empty")
                                 }
-                            }
+                            //}
+                            //.padding()
+                        }
+                        .frame(width: 370,height: 500)
+//                        RoundedRectangle(cornerRadius: 10)
+//                            .frame(width: 370,height: 500)
+//                            .foregroundColor(Color("DefaultRectangleBg"))
+//                            .overlay{
+//                                
+//                            }
                     }
                     Spacer()
                     
                     VStack{
+                        Spacer()
                         HStack{
                             Text("Total")
                             Spacer()
