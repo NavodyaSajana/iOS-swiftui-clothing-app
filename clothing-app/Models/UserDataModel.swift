@@ -7,11 +7,9 @@
 
 import Foundation
 
-struct UserDataModel : Decodable {
-    var id : String
-    var name : String
-    var email : String
-    var password : String
-    var telephone : Int
-    var age : Int
+struct UserDataModel: Codable {
+    //var id = UUID().uuidString
+    var email: String
+    var name: String
+    var telephone: Int
 }

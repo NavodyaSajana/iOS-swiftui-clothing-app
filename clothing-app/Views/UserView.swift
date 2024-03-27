@@ -11,7 +11,10 @@ struct UserView: View {
     
     @State private var email : String = ""
     @State private var password : String = ""
+    @State private var showEmail : String = ""
+    @State private var showName : String = ""
     @StateObject var userVM = UserViewModel()
+    @ObservedObject var viewModel = UserViewModel()
     
     var body: some View {
         NavigationStack{
@@ -29,11 +32,20 @@ struct UserView: View {
                                             .frame(width: 72,height: 72)
                                             .clipShape(Circle())
                                         VStack(alignment: .leading,spacing: 4){
-                                            Text("\(userVM.username)")
-                                                .font(.title)
+                                            //fetch user
+                                            if let user = userVM.user{
+                                                Text("\(user.name)")
+                                                    .font(.title)
+                                                Text("\(user.email)")
+                                                    .foregroundStyle(.gray)
+                                            } else {
+                                                Text("Loading...")
+                                                    .onAppear {
+                                                        //viewModel.fetchUser(email: email)
+                                                        userVM.fetchUser(email: email)
+                                                    }
+                                            }
                                             
-                                            Text("\(userVM.email)")
-                                                .foregroundStyle(.gray)
                                         }
                                     }
                                 }
@@ -53,6 +65,7 @@ struct UserView: View {
                                            spacing: 20){
                                         Button{
                                             password=""
+                                            email=""
                                             userVM.logout()
                                         }label:{
                                             HStack{
@@ -100,6 +113,7 @@ struct UserView: View {
                         .foregroundStyle(.red)
                         .font(.system(size: 14))
                 }else{
+                    //userVM.getUser(email: "")
                     Text("")
                 }
                 //sign in button
