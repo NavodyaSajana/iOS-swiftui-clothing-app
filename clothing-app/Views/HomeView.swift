@@ -13,6 +13,8 @@ struct HomeView: View {
     @StateObject var homeVM : HomeViewModel = HomeViewModel()
     @StateObject var itemVM : ItemViewModel = ItemViewModel()
     @StateObject var cartVM : CartViewModel = CartViewModel()
+    @StateObject var favVM : FavouriteViewModel = FavouriteViewModel()
+    @State private var showingItem = false
     var colomns = [GridItem(.adaptive(minimum: 160), spacing: 0)]
     
     var body: some View {
@@ -64,35 +66,6 @@ struct HomeView: View {
                             }
                     }
                     
-                    HStack{//Message with Image (discounts, downtimes, etc...)
-                        RoundedRectangle(cornerRadius: 10)
-                            .padding(.horizontal, 10)
-                            .frame(height:135)
-                            .foregroundColor(Color("DefaultRectangleBg"))
-                            .overlay{
-                                HStack{
-                                    HStack{
-                                        RoundedRectangle(cornerRadius: 0)
-                                            .frame(maxHeight: .infinity)
-                                            .opacity(0)
-                                            .overlay{
-                                                VStack{
-                                                    Text("Discount")
-                                                    Text("Discount")
-                                                    Text("Discount")
-                                                }
-                                                
-                                            }
-                                    }
-                                    HStack{
-                                        RoundedRectangle(cornerRadius: 0)
-                                            .frame(maxHeight: .infinity)
-                                    }
-                                }.padding(.horizontal,35)
-                                
-                            }
-                    }
-                    
                     HStack{// Show the basic categories
                         RoundedRectangle(cornerRadius: 20)
                             .frame(width: 320,height: 25)
@@ -122,14 +95,22 @@ struct HomeView: View {
                         LazyVGrid(columns: colomns, spacing: 20){
                             ForEach(itemVM.itemData,id:\.self){
                                 cloth in
-                                //ClothingCard(itemDM.imageName :itemDM.imageName,name :itemDM.name,price:itemDM.price)
-                                ClothingCard(itemDM: cloth)
-                                    .environmentObject(cartVM)
+                                Button {
+                                    showingItem = true
+                                } label: {
+                                    ClothingCard(itemDM: cloth)
+                                        .environmentObject(cartVM)
+                                        .environmentObject(favVM)
+                                }
+                                .popover(isPresented: $showingItem, content: {
+                                    Text("Select your Size")
+                                })
+                                
                             }
                         }
                     }
                     
-
+                    
                     
                 }
                 .padding(.top)

@@ -18,17 +18,17 @@ struct NotificationView: View {
                     
                     ScrollView{//Favourite Display
                         Text("No notifications")
-//                        LazyVGrid(columns: colomns, spacing: 20){
-//                            ForEach(itemVM.itemData,id:\.self){
-//                                cloth in
-//                                //ClothingCard(itemDM.imageName :itemDM.imageName,name :itemDM.name,price:itemDM.price)
-//                                ClothingCard(itemDM: cloth)
-//                                    .environmentObject(cartVM)
-//                            }
-//                        }
+                        //                        LazyVGrid(columns: colomns, spacing: 20){
+                        //                            ForEach(itemVM.itemData,id:\.self){
+                        //                                cloth in
+                        //                                //ClothingCard(itemDM.imageName :itemDM.imageName,name :itemDM.name,price:itemDM.price)
+                        //                                ClothingCard(itemDM: cloth)
+                        //                                    .environmentObject(cartVM)
+                        //                            }
+                        //                        }
                     }
                     
-
+                    
                     
                 }
                 .padding(.top)

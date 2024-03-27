@@ -18,7 +18,7 @@ struct ItemDataModel : Hashable{
 
 //Image(systemName: "square.and.pencil.circle.fill")
 var sampleItemData = [ItemDataModel(imageName: "sampleMen", price: 10.00, name: "test1"),
-                          ItemDataModel(imageName: "sampleMen", price: 20.45, name: "test2"),
-                          ItemDataModel(imageName: "sampleMen", price: 30.7, name: "test3"),
-                          ItemDataModel(imageName: "sampleMen", price: 40.9, name: "test4"),
-                          ItemDataModel(imageName: "sampleMen", price: 60.3, name: "test5")]
+                      ItemDataModel(imageName: "sampleMen", price: 20.45, name: "test2"),
+                      ItemDataModel(imageName: "sampleMen", price: 30.7, name: "test3"),
+                      ItemDataModel(imageName: "sampleMen", price: 40.9, name: "test4"),
+                      ItemDataModel(imageName: "sampleMen", price: 60.3, name: "test5")]

@@ -13,33 +13,23 @@ struct CartView: View {
     var body: some View {
         ZStack{
             NavigationStack{
+                Spacer()
                 VStack(spacing: 20){
-                    //HStack{//Menu Name
                     Text("Cart").bold()
-                    // }
                     
-                    Spacer()
+                    //Spacer()
                     VStack{
                         List{
-                            //VStack{
-                                if cartVM.items.count > 0 {
-                                    ForEach(cartVM.items,id:\.self){
-                                        data in
-                                        CartItemCard(itemDM: data)
-                                    }
-                                } else {
-                                    Text("Your Cart is Empty")
+                            if cartVM.items.count > 0 {
+                                ForEach(cartVM.items,id:\.self){
+                                    data in
+                                    CartItemCard(itemDM: data)
                                 }
-                            //}
-                            //.padding()
+                            } else {
+                                Text("Your Cart is Empty")
+                            }
                         }
                         .frame(width: 370,height: 500)
-//                        RoundedRectangle(cornerRadius: 10)
-//                            .frame(width: 370,height: 500)
-//                            .foregroundColor(Color("DefaultRectangleBg"))
-//                            .overlay{
-//                                
-//                            }
                     }
                     Spacer()
                     
@@ -63,21 +53,6 @@ struct CartView: View {
                             Text("\(cartVM.total, specifier: "%.2f") $")
                         }
                     }.padding(.horizontal,20)
-                    
-                    
-//                    Button(action:{},label: {
-//                        RoundedRectangle(cornerRadius: 50)
-//                            .padding(.horizontal,15)
-//                            .frame(height:60)
-//                            .overlay{
-//                                HStack{
-//                                    Text("Checkout")
-//                                        .foregroundStyle(.white).bold()
-//                                    Image(systemName: "arrow.forward")
-//                                        .foregroundColor(.white)
-//                                }
-//                            }
-//                    })
                     Button{
                         print("user login")
                     } label: {
@@ -85,36 +60,20 @@ struct CartView: View {
                             Text("CHECKOUT")
                                 .foregroundStyle(.white).bold()
                             Image(systemName: "arrow.forward")
-                                
+                            
                         }
                         .foregroundColor(.white)
                         .frame(width: UIScreen.main.bounds.width - 32,height:48)
                     }
                     .background(Color(.systemBlue))
                     .cornerRadius(50)
-                    
                     Spacer()
-                    
                 }
                 .padding(.top)
                 .padding(.bottom)
                 .preferredColorScheme(.light)
                 Spacer()
-                
             }
-//            .navigationBarBackButtonHidden(true)
-//            .toolbar{
-//                ToolbarItem(placement: .navigationBarLeading){
-//                    NavigationLink(destination:{
-//                        //EmptyView()
-//                        DashboardView()
-//                    },label: {
-//                        Image(systemName : "chevron.backward")
-//                        Text("Home")
-//                    })
-//                }
-//            }
-            
         }
     }
 }

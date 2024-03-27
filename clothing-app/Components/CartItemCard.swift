@@ -10,51 +10,35 @@ import SwiftUI
 
 struct CartItemCard : View {
     @EnvironmentObject var cartVM : CartViewModel
+    @State var getSize:Int = 1
+    @State var size:String = "S"
     
     var itemDM : ItemDataModel
-//    var imageName : String
-//    var name : String
-//    var price : String
     
     var body: some View{
-//            RoundedRectangle(cornerRadius: 10)
-//                .frame(width:350,height: 120)
-//                .padding(.horizontal)
-//                .foregroundColor(.white)
-//                .overlay{
-//                    HStack{
-//                        Image(itemDM.imageName)
-//                            .resizable()
-//                            .frame(width: 100, height: 100)
-//                            .aspectRatio(contentMode: .fit)
-//                        VStack{
-//                            Text(itemDM.name)
-//                            Text("\(itemDM.price, specifier: "%.2f") $")
-//                        }.padding()
-//                    }
-//                    .padding(.horizontal,30)
-//                    .foregroundStyle(.black.opacity(0.8))
-//                    .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/,content: {
-//                        Button(action: {
-//                            withAnimation{
-//                                cartVM.removeFromCart(item: itemDM)
-//                            }
-//                        }, label: {
-//                            Text("Remove")
-//                        }).tint(.red)
-//                    })
-//                }
         HStack{
             Image(itemDM.imageName)
                 .resizable()
-                .frame(width: 100, height: 100)
+                .frame(width: 80, height: 80)
                 .aspectRatio(contentMode: .fit)
+            //Spacer()
             VStack{
                 Text(itemDM.name)
                 Text("\(itemDM.price, specifier: "%.2f") $")
-            }.padding()
+            }
+            .padding()
+            Spacer()
+            VStack{
+                Circle()
+                    .frame(width: 40)
+                    .foregroundColor(Color.gray)
+                    .overlay{
+                        Text(size)
+                    }
+            }
+            Spacer()
         }
-        .padding(.horizontal,2)
+        //.padding(.leading)
         .foregroundStyle(.black.opacity(0.8))
         .swipeActions(edge: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/,content: {
             Button(action: {
@@ -65,6 +49,39 @@ struct CartItemCard : View {
                 Text("Remove")
             }).tint(.red)
         })
+        .swipeActions(edge:.leading,content: {
+            Button(action: {
+                size = "S"
+            }, label: {
+                Text("S")
+            })
+            .tint(.green)
+            
+            Button(action: {
+                size = "M"
+            }, label: {
+                Text("M")
+            })
+            .tint(.blue)
+            
+            Button(action: {
+                size = "L"
+            }, label: {
+                Text("L")
+            })
+            .tint(.yellow)
+            
+            Button(action: {
+                size = "XL"
+            }, label: {
+                Text("XL")
+            })
+            .tint(.orange)
+        })
         
     }
+}
+
+#Preview {
+    CartItemCard(itemDM: sampleItemData[0])
 }

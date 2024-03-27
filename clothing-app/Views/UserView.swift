@@ -23,11 +23,11 @@ struct UserView: View {
                             List{
                                 Section{
                                     HStack{
-                                        Image("sampleMen")
+                                        Image("logo")
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 72,height: 72)
-                                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                                            .clipShape(Circle())
                                         VStack(alignment: .leading,spacing: 4){
                                             Text("\(userVM.username)")
                                                 .font(.title)
@@ -52,6 +52,7 @@ struct UserView: View {
                                     VStack(alignment: .center,
                                            spacing: 20){
                                         Button{
+                                            password=""
                                             userVM.logout()
                                         }label:{
                                             HStack{
@@ -64,7 +65,7 @@ struct UserView: View {
                                                 .tint(.red)
                                             }
                                         }
-                                    }.frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                                    }.frame(maxWidth: .infinity)
                                 }
                                 
                             }
@@ -77,7 +78,7 @@ struct UserView: View {
             }else{
                 //image
                 
-                Image("sampleMen")
+                Image("logo")
                     .resizable()
                     .scaledToFill()
                     .frame(width:100,height:120)
@@ -86,15 +87,15 @@ struct UserView: View {
                 //form field
                 
                 VStack{
-                    UserInputView(text:$userVM.username, title: "Email Address", placeHolder: "name@example.com")
-                        .textInputAutocapitalization(.none)
+                    UserInputView(text:$email, title: "Email Address", placeHolder: "name@example.com")
+                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     
-                    UserInputView(text:$userVM.password, title: "Password", placeHolder: "Password", isSecureField: true)
+                    UserInputView(text:$password, title: "Password", placeHolder: "Password", isSecureField: true)
                     
                 }
                 .padding(.horizontal)
                 .padding(.vertical)
-                if(userVM.showError){
+                if userVM.showError {
                     Text(userVM.errorMessage)
                         .foregroundStyle(.red)
                         .font(.system(size: 14))
@@ -104,7 +105,8 @@ struct UserView: View {
                 //sign in button
                 
                 Button(action:{
-                    userVM.verifyLogin()
+                    //userVM.verifyLogin()
+                    userVM.login(email: email, password: password)
                 },label: {
                     HStack{
                         Text("SIGN IN")
