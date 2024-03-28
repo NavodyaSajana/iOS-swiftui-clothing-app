@@ -41,7 +41,6 @@
 		BDC38AD12BA344C5006FC80F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC38AD02BA344C5006FC80F /* HomeView.swift */; };
 		BDCA04312BB5ED69005ED6CD /* CategoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA04302BB5ED69005ED6CD /* CategoryDataModel.swift */; };
 		BDCA04332BB5EEA7005ED6CD /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA04322BB5EEA7005ED6CD /* CategoryViewModel.swift */; };
-		BDCA04352BB5F1A0005ED6CD /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA04342BB5F1A0005ED6CD /* CategoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,7 +98,6 @@
 		BDC38AD02BA344C5006FC80F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BDCA04302BB5ED69005ED6CD /* CategoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataModel.swift; sourceTree = "<group>"; };
 		BDCA04322BB5EEA7005ED6CD /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
-		BDCA04342BB5F1A0005ED6CD /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,7 +210,6 @@
 				BD93024F2BAF3BA0001FFE80 /* UserView.swift */,
 				BD9302512BAF3CCD001FFE80 /* SignUpView.swift */,
 				BD1DC4EF2BB18E03008DBD91 /* FavouriteView.swift */,
-				BDCA04342BB5F1A0005ED6CD /* CategoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -387,7 +384,6 @@
 				BD1DC4F22BB1C519008DBD91 /* FavouriteViewModel.swift in Sources */,
 				BD0F5F892BB3254E00B50F30 /* SignUpDataModel.swift in Sources */,
 				BDB316432BAB3D90005B72D6 /* ItemView.swift in Sources */,
-				BDCA04352BB5F1A0005ED6CD /* CategoryView.swift in Sources */,
 				BDCA04312BB5ED69005ED6CD /* CategoryDataModel.swift in Sources */,
 				BD0F5F872BB310F400B50F30 /* SignUpViewModel.swift in Sources */,
 				BD85CE5C2BB01BB800DF8C0E /* UserViewModel.swift in Sources */,

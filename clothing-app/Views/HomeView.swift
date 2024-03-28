@@ -16,6 +16,8 @@ struct HomeView: View {
     @StateObject var cartVM : CartViewModel = CartViewModel()
     @StateObject var favVM : FavouriteViewModel = FavouriteViewModel()
     @State private var showingItem = false
+    @State private var selectedCategory: String?
+    @State private var searchString: String = ""
     var colomns = [GridItem(.adaptive(minimum: 160), spacing: 0)]
     
     var body: some View {
@@ -62,7 +64,10 @@ struct HomeView: View {
                             .overlay{
                                 HStack{
                                     Image(systemName: "magnifyingglass")
-                                    TextField("What are you looking for...",text: $homeVM.searchString)
+                                    TextField("What are you looking for...",text: $searchString)
+                                        .onChange(of: searchString) {  _ in
+                                            itemVM.fetchData(category: selectedCategory ?? "All", searchString: searchString)
+                                        }
                                 }.padding(.horizontal,48)
                             }
                     }
@@ -74,15 +79,31 @@ struct HomeView: View {
                             .opacity(0)
                             .overlay{
                                 ScrollView(.horizontal){
+                                    
                                     LazyHStack{
-                                        ForEach(categoryVM.categories, id: \.self){
-                                            data in
+                                        Button {
+                                            itemVM.fetchData()
+                                        } label: {
                                             RoundedRectangle(cornerRadius: 10)
                                                 .frame(width: 90,height: 30)
                                                 .foregroundColor(Color("DefaultRectangleBg"))
                                                 .overlay{
-                                                    Text(data)
+                                                    Text("All")
                                                 }
+                                        }
+                                        ForEach(categoryVM.categories, id: \.self){
+                                            data in
+                                            Button {
+                                                selectedCategory = data
+                                                itemVM.fetchData(category: selectedCategory ?? "Mens",searchString: self.searchString)
+                                            } label: {
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .frame(width: 90,height: 30)
+                                                    .foregroundColor(Color("DefaultRectangleBg"))
+                                                    .overlay{
+                                                        Text(data)
+                                                    }
+                                            }
                                         }
                                     }
                                 }

@@ -16,7 +16,7 @@ class CategoryViewModel: ObservableObject {
     }
     
     func fetchData() {
-        guard let url = URL(string: "http://localhost:3000/api/product/categories") else {
+        guard let url = URL(string: "http://localhost:3000/api/item/categories") else {
             return
         }
         
