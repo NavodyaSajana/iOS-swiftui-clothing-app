@@ -9,25 +9,28 @@ import SwiftUI
 
 struct FavouriteView: View {
     
-    @EnvironmentObject var favVM : FavouriteViewModel
+    @StateObject var userVM : UserViewModel = UserViewModel()
+    @StateObject var favVM : FavouriteViewModel = FavouriteViewModel()
     
     var body: some View {
         List{
-            if favVM.items.count > 0 {
-                ForEach(favVM.items){
-                    data in
-                    FavouriteItemCard(itemDM: data)
+            if userVM.authenticated {
+                //favVM.fetchData(email: "userVM.usernam")
+                if favVM.items.count < 0{
+                    Text("Your favourites is Empty!")
+                }else {
+                    ForEach(favVM.items){
+                        data in
+                        FavouriteItemCard(itemDM: data)
+                    }
                 }
             } else {
-                Text("Your Favourites is Empty")
+                Text("Login to check your Favouries!")
             }
         }
-        .frame(width: 370,height: 500)
     }
-    
 }
 
 #Preview {
     FavouriteView()
-        .environmentObject(FavouriteViewModel())
 }

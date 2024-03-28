@@ -12,6 +12,7 @@ struct HomeView: View {
     
     @StateObject var homeVM : HomeViewModel = HomeViewModel()
     @StateObject var itemVM : ItemViewModel = ItemViewModel()
+    @StateObject var userVM : UserViewModel = UserViewModel()
     @StateObject var categoryVM : CategoryViewModel = CategoryViewModel()
     @StateObject var cartVM : CartViewModel = CartViewModel()
     @StateObject var favVM : FavouriteViewModel = FavouriteViewModel()
@@ -39,7 +40,11 @@ struct HomeView: View {
                                     HStack{
                                         VStack{
                                             Text("Hello Welcome!").font(.custom("SF Armenian",size: 15))
-                                            Text("Sajana Rupasihgnghe").bold()
+                                            if userVM.authenticated {
+                                                Text(userVM.username).bold()
+                                            } else {
+                                                Text("The Z Store").bold()
+                                            }
                                         }
                                     }
                                     Spacer()
@@ -120,13 +125,9 @@ struct HomeView: View {
                                 Button {
                                     showingItem = true
                                 } label: {
-                                    ClothingCard(itemDM: cloth)
+                                    ClothingCard(itemDM: cloth,favVM: favVM, userVM: userVM)
                                         .environmentObject(cartVM)
-                                        .environmentObject(favVM)
                                 }
-                                .popover(isPresented: $showingItem, content: {
-                                    Text("Select your Size")
-                                })
                                 
                             }
                         }

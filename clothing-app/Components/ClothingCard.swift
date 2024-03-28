@@ -10,11 +10,14 @@ import SwiftUI
 
 struct ClothingCard : View {
     @EnvironmentObject var cartVM : CartViewModel
-    @EnvironmentObject var favVM : FavouriteViewModel
+    
     @State private var refresh = false
+    @State private var showAlert = false
+    
     
     var itemDM: ItemDataModel
-    
+    var favVM : FavouriteViewModel
+    var userVM : UserViewModel
     
     var body: some View{
         ZStack(alignment: .topTrailing){
@@ -59,19 +62,30 @@ struct ClothingCard : View {
                     VStack(alignment: .leading){
                         Text(itemDM.prod_name)
                             .font(.system(size: 14, weight: .bold))
-                            
+                        
                         Text("\(itemDM.prod_price, specifier: "%.2f") $")
                             .font(.caption)
                             .font(.system(size: 10))
                     }
                     Spacer()
                     Button{
-                        favVM.addToFavourite(item: itemDM)
+                        if userVM.authenticated{
+                            favVM.addToFavourites(item_id: "\(itemDM.id)", user_id: userVM.username)
+                        } else {
+                            //show alert
+                            showAlert = true
+                        }
                     } label: {
                         Image(systemName: "heart.fill")
                             .imageScale(.large)
                             .foregroundColor(.red)
                     }
+                    .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text("Unable to Add to Favourites"),
+                                message: Text("Make sure to login before add Favourites")
+                            )
+                        }
                     
                 }
                 .padding()
@@ -79,28 +93,9 @@ struct ClothingCard : View {
                 .background(.ultraThinMaterial)
                 .cornerRadius(10)
             }
-            //.frame(width:100,height: 180)
             .shadow(radius: 9)
-            
-            //            Button(action: {
-            //                cartVM.addToCart(item: itemDM)
-            //            }, label: {
-            //                Circle()
-            //                    .frame(width: 38)
-            //                    .foregroundColor(.gray)
-            //                    .shadow(radius: 15)
-            //                    .overlay{
-            //                        Image(systemName: "plus")
-            //                        //.padding(1)
-            //                            .foregroundColor(.black)
-            //                        //.background(.gray)
-            //                            .cornerRadius(50)
-            //                            .imageScale(.medium)
-            //                            .padding()
-            //                    }
-            //
-            //            })
         }
+
     }
 }
 

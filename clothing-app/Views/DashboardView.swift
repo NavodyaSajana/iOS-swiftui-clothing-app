@@ -16,7 +16,6 @@ struct DashboardView: View {
                         Label("Home",systemImage: "house")
                     }
                 FavouriteView()
-                    .environmentObject(FavouriteViewModel())
                     .tabItem {
                         Label("Favourites",systemImage: "heart")
                     }

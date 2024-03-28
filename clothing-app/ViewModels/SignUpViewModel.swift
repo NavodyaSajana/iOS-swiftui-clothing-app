@@ -59,13 +59,6 @@ class SignUpViewModel : ObservableObject {
                 if httpResponse.statusCode == 200 {
                     self.showSuccess = true
                 }
-                
-                //                if let data = data {
-                //                    if let responseString = String(data: data, encoding: .utf8) {
-                //                        self.showError = true
-                //                        self.errorMessage = "Response from server: \(responseString)"
-                //                    }
-                //                }
             }.resume()
         }
     }
