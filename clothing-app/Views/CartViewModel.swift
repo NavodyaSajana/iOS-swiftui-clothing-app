@@ -14,12 +14,12 @@ class CartViewModel : ObservableObject {
     
     func addToCart(item : ItemDataModel){
         items.append(item)
-        total += item.price
+        total += item.prod_price
     }
     
     func removeFromCart(item : ItemDataModel){ 
-        items = items.filter { $0.clothID != item.clothID }
-        total -= item.price
+        items = items.filter { $0.id != item.id }
+        total -= item.prod_price
     }
     
 }

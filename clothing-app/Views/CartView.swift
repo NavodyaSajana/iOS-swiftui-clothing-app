@@ -21,7 +21,7 @@ struct CartView: View {
                     VStack{
                         List{
                             if cartVM.items.count > 0 {
-                                ForEach(cartVM.items,id:\.self){
+                                ForEach(cartVM.items){
                                     data in
                                     CartItemCard(itemDM: data)
                                 }

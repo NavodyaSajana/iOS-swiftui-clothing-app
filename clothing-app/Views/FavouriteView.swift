@@ -14,7 +14,7 @@ struct FavouriteView: View {
     var body: some View {
         List{
             if favVM.items.count > 0 {
-                ForEach(favVM.items,id:\.self){
+                ForEach(favVM.items){
                     data in
                     FavouriteItemCard(itemDM: data)
                 }

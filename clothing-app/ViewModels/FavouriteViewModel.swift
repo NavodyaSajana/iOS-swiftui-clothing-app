@@ -16,7 +16,7 @@ class FavouriteViewModel : ObservableObject {
     }
     
     func removeFromFavourite(item : ItemDataModel){
-        items = items.filter { $0.clothID != item.clothID }
+        items = items.filter { $0.id != item.id }
     }
     
 }

@@ -12,6 +12,7 @@ struct HomeView: View {
     
     @StateObject var homeVM : HomeViewModel = HomeViewModel()
     @StateObject var itemVM : ItemViewModel = ItemViewModel()
+    @StateObject var categoryVM : CategoryViewModel = CategoryViewModel()
     @StateObject var cartVM : CartViewModel = CartViewModel()
     @StateObject var favVM : FavouriteViewModel = FavouriteViewModel()
     @State private var showingItem = false
@@ -47,7 +48,7 @@ struct HomeView: View {
                                             .toolbar(.hidden, for:.tabBar)
                                     },label: {
                                         CartButton(numberOfProducts: cartVM.items.count)
-                                    })                                    
+                                    })
                                 }
                             }
                         
@@ -74,13 +75,13 @@ struct HomeView: View {
                             .overlay{
                                 ScrollView(.horizontal){
                                     LazyHStack{
-                                        ForEach(homeVM.categoryData,id:\.self){
-                                            category in
+                                        ForEach(categoryVM.categories, id: \.self){
+                                            data in
                                             RoundedRectangle(cornerRadius: 10)
                                                 .frame(width: 90,height: 30)
                                                 .foregroundColor(Color("DefaultRectangleBg"))
                                                 .overlay{
-                                                    Text(category.categoryName)
+                                                    Text(data)
                                                 }
                                         }
                                     }
@@ -93,7 +94,7 @@ struct HomeView: View {
                     
                     ScrollView{
                         LazyVGrid(columns: colomns, spacing: 20){
-                            ForEach(itemVM.itemData,id:\.self){
+                            ForEach(itemVM.itemDM){
                                 cloth in
                                 Button {
                                     showingItem = true

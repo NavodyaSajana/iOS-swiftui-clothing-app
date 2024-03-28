@@ -17,14 +17,14 @@ struct CartItemCard : View {
     
     var body: some View{
         HStack{
-            Image(itemDM.imageName)
+            Image(itemDM.prod_image)
                 .resizable()
                 .frame(width: 80, height: 80)
                 .aspectRatio(contentMode: .fit)
             //Spacer()
             VStack{
-                Text(itemDM.name)
-                Text("\(itemDM.price, specifier: "%.2f") $")
+                Text(itemDM.prod_name)
+                Text("\(itemDM.prod_price, specifier: "%.2f") $")
             }
             .padding()
             Spacer()
@@ -82,6 +82,6 @@ struct CartItemCard : View {
     }
 }
 
-#Preview {
-    CartItemCard(itemDM: sampleItemData[0])
-}
+//#Preview {
+//    CartItemCard(itemDM: sampleItemData[0])
+//}

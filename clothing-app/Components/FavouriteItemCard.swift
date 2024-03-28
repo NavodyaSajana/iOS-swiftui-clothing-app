@@ -14,13 +14,13 @@ struct FavouriteItemCard : View {
     
     var body: some View{
         HStack{
-            Image(itemDM.imageName)
+            Image(itemDM.prod_image)
                 .resizable()
                 .frame(width: 100, height: 100)
                 .aspectRatio(contentMode: .fit)
             VStack{
-                Text(itemDM.name)
-                Text("\(itemDM.price, specifier: "%.2f") $")
+                Text(itemDM.prod_name)
+                Text("\(itemDM.prod_price, specifier: "%.2f") $")
             }.padding()
         }
         .padding(.horizontal,2)
