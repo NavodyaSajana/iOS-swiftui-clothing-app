@@ -16,6 +16,7 @@ struct CartView: View {
                 Spacer()
                 VStack(spacing: 20){
                     Text("Cart").bold()
+                        .font(.title)
                     
                     //Spacer()
                     VStack{

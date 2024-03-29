@@ -122,12 +122,9 @@ struct HomeView: View {
                         LazyVGrid(columns: colomns, spacing: 20){
                             ForEach(itemVM.itemDM){
                                 cloth in
-                                Button {
-                                    showingItem = true
-                                } label: {
-                                    ClothingCard(itemDM: cloth,favVM: favVM, userVM: userVM)
+                                ClothingCard(itemDM: cloth,favVM: favVM, userVM: userVM)
                                         .environmentObject(cartVM)
-                                }
+                                
                                 
                             }
                         }
