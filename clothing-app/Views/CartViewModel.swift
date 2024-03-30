@@ -13,6 +13,8 @@ class CartViewModel : ObservableObject {
     @Published var items: [CartDataModel] = []
     @Published var total: Double = 0.00
     @Published var cartCount: Int = 0
+    @Published var showError: Bool = false
+    @Published var showSuccess: Bool = false
     
     func fetchCartData(forEmail email: String) {
         guard let url = URL(string: "http://localhost:3000/api/cart/\(email)") else {
@@ -52,9 +54,6 @@ class CartViewModel : ObservableObject {
                 self.errorMessage = error?.localizedDescription ?? "Unknown error"
                 return
             }
-            
-            
-            
             DispatchQueue.main.async {
                 // Handle successful deletion if needed
             }
@@ -73,5 +72,107 @@ class CartViewModel : ObservableObject {
             totalAmount += item.prod_price * Double(item.qty)
         }
         self.total = totalAmount
+    }
+    
+    func placeOrder(email: String,total: String){
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        let date = dateFormatter.string(from: currentDate)
+        
+        guard let url = URL(string: "http://localhost:3000/api/order") else {
+            print("Invalid URL")
+            return
+        }
+        let orderData = OrderDataModel(email: email, total: total, date: date)
+        guard let jsonData = try? JSONEncoder().encode(orderData) else {
+            self.showError = true
+            self.errorMessage = "Failed to encode order data"
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                self.showError = true
+                self.errorMessage = "Error: \(error?.localizedDescription ?? "Unknown error")"
+                self.errorMessage = "something went wrong"
+                return
+            }
+            
+            if httpResponse.statusCode == 200 {
+                self.showSuccess = true
+                
+            }
+        }.resume()
+        self.addItems()
+    }
+    
+    func addOrderItems(item_id: Int,size: String,qty: Int){
+        guard let url = URL(string: "http://localhost:3000/api/order/add-items") else {
+            print("Invalid URL")
+            return
+        }
+        let itemData = PurchaseDataModel(item_id: item_id, size: size, qty: qty)
+        guard let jsonData = try? JSONEncoder().encode(itemData) else {
+            self.showError = true
+            self.errorMessage = "Failed to encode item data"
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                self.showError = true
+                self.errorMessage = "Error: \(error?.localizedDescription ?? "Unknown error")"
+                self.errorMessage = "something went wrong"
+                return
+            }
+            
+            if httpResponse.statusCode == 200 {
+                self.showSuccess = true
+                
+            }
+        }.resume()
+    }
+    
+    func deleteCartItems(forEmail email: String) {
+        guard let url = URL(string: "http://localhost:3000/api/cart/delete/\(email)") else {
+            self.showError = true
+            self.errorMessage = "Invalid URL"
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let _ = data, error == nil else {
+                self.showError = true
+                self.errorMessage = error?.localizedDescription ?? "Unknown error"
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                self.showSuccess = true
+            } else {
+                self.showError = true
+                self.errorMessage = "Error deleting cart items"
+            }
+        }.resume()
+    }
+    
+    func addItems(){
+        for item in self.items {
+            //self.addOrderItems(item_id: item.id, size: item.size, qty: item.qty)
+        }
     }
 }

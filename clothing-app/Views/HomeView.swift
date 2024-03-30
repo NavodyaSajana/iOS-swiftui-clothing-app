@@ -127,8 +127,6 @@ struct HomeView: View {
                                 cloth in
                                 ClothingCard(itemDM: cloth,favVM: favVM, userVM: userVM)
                                         .environmentObject(cartVM)
-                                
-                                
                             }
                         }
                     }

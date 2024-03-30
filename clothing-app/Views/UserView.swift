@@ -42,7 +42,7 @@ struct UserView: View {
                                                 Text("Loading...")
                                                     .onAppear {
                                                         //viewModel.fetchUser(email: email)
-                                                        userVM.fetchUser(email: email)
+                                                        userVM.fetchUser(email: userVM.username)
                                                     }
                                             }
                                             

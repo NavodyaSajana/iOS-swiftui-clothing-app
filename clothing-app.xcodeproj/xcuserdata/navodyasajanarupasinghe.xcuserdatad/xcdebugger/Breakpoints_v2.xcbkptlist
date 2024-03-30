@@ -52,5 +52,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE2B8CA9-196D-4491-93BF-CD6E27E8470D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "clothing-app/Views/CartViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "addOrderItems(item_id:size:qty:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F163778-B306-4BEA-AA2E-2DB2C519DC15"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "clothing-app/Views/CartViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "placeOrder(email:total:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3F163778-B306-4BEA-AA2E-2DB2C519DC15 - 21304c60432e1f42"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "clothing_app.CartViewModel.placeOrder(email: Swift.String, total: Swift.String) -&gt; ()"
+                  moduleName = "clothing-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/navodyasajanarupasinghe/Desktop/NIBM%20Y4/iOS%20Development/clothing-app/clothing-app/Views/CartViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
+                  offsetFromSymbolStart = "1440">
+               </Location>
+               <Location
+                  uuid = "3F163778-B306-4BEA-AA2E-2DB2C519DC15 - 1a5a02449855c897"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in clothing_app.CartViewModel.placeOrder(email: Swift.String, total: Swift.String) -&gt; ()"
+                  moduleName = "clothing-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/navodyasajanarupasinghe/Desktop/NIBM%20Y4/iOS%20Development/clothing-app/clothing-app/Views/CartViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
+                  offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

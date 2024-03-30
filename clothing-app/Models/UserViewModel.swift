@@ -30,11 +30,12 @@ class UserViewModel : ObservableObject{
         self.email = ""
         self.user = nil
         self.username = ""
+        authenticated = false
         //username = ""
         //authenticated = false
-        withAnimation{
-            authenticated.toggle()
-        }
+//        withAnimation{
+//            authenticated.toggle()
+//        }
     }
     
     func login(email: String, password: String) {

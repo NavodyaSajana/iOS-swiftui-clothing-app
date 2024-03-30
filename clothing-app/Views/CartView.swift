@@ -12,6 +12,8 @@ struct CartView: View {
     @StateObject var userVM : UserViewModel = UserViewModel()
     @ObservedObject var cartVM = CartViewModel()
     @State var total : Double = 0.00
+    @State var orderID : Int = 0
+    @State var updateCart: Bool = false
     
     var body: some View {
         ZStack{
@@ -31,15 +33,14 @@ struct CartView: View {
                                     ForEach(cartVM.items){
                                         data in
                                         CartItemCard(cartDM: data, cartVM: cartVM)
-                                        //cartVM.calculateTotal(item: data)
-                                        //total += data.prod_price
                                     }
                                 }
                             } else {
-                                Text("Login to check your Favouries!")
+                                Text("Login to check your Cart!")
                             }
                         }
-                        .onAppear{
+                        
+                    .onAppear{
                             if userVM.authenticated{
                                 cartVM.fetchCartData(forEmail: userVM.username)
                             }
@@ -73,9 +74,12 @@ struct CartView: View {
                             Spacer()
                             Text("$ \(cartVM.total, specifier: "%.2f")")
                         }
+                        //Text(cartVM.latestOrderId)
                     }.padding(.horizontal,20)
+                    
                     Button{
-                        print("user login")
+                        cartVM.placeOrder(email: userVM.username, total: "\(cartVM.total)")
+                        cartVM.deleteCartItems(forEmail: userVM.username)
                     } label: {
                         HStack{
                             Text("CHECKOUT")
@@ -88,12 +92,30 @@ struct CartView: View {
                     }
                     .background(Color(.systemBlue))
                     .cornerRadius(50)
+                    .alert(isPresented: $cartVM.showError) {
+                        Alert(
+                            title: Text("Unable to Place the Order"),
+                            message: Text("Please try again later")
+                        )
+                    }
+                    .alert(isPresented: $cartVM.showSuccess) {
+                        Alert(
+                            title: Text("Your Order"),
+                            message: Text("Order Placed Successfully")
+                        )
+                    }
+                    
                     Spacer()
                 }
                 .padding(.top)
                 .padding(.bottom)
                 .preferredColorScheme(.light)
                 Spacer()
+            }
+        }
+        .onTapGesture {
+            if userVM.authenticated{
+                cartVM.fetchCartData(forEmail: userVM.username)
             }
         }
     }
