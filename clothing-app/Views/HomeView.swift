@@ -22,7 +22,6 @@ struct HomeView: View {
     var colomns = [GridItem(.adaptive(minimum: 160), spacing: 0)]
     
     var body: some View {
-        
         //var searchText: String="null"
         ZStack{
             NavigationView{
@@ -51,7 +50,6 @@ struct HomeView: View {
                                     NavigationLink(destination:{
                                         //EmptyView()
                                         CartView()
-                                            .environmentObject(cartVM)
                                             .toolbar(.hidden, for:.tabBar)
                                     },label: {
                                         CartButton(numberOfProducts: cartVM.items.count)
@@ -59,6 +57,11 @@ struct HomeView: View {
                                 }
                             }
                         
+                    }
+                    .onAppear{
+                        if userVM.authenticated{
+                            cartVM.fetchCartData(forEmail: userVM.username)
+                        }
                     }
                     
                     HStack{//Item Search bar

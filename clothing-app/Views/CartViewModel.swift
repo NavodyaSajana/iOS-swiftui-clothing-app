@@ -9,17 +9,69 @@ import Foundation
 import SwiftUI
 
 class CartViewModel : ObservableObject {
-    @Published private(set) var items : [ItemDataModel] = []
-    @Published private(set) var total : Double = 0.00
+    @Published var errorMessage: String = ""
+    @Published var items: [CartDataModel] = []
+    @Published var total: Double = 0.00
+    @Published var cartCount: Int = 0
     
-    func addToCart(item : ItemDataModel){
-        items.append(item)
-        total += item.prod_price
+    func fetchCartData(forEmail email: String) {
+        guard let url = URL(string: "http://localhost:3000/api/cart/\(email)") else {
+            self.errorMessage = "Invalid URL"
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                self.errorMessage = error?.localizedDescription ?? "Unknown error"
+                return
+            }
+            
+            do {
+                let decodedData = try JSONDecoder().decode([CartDataModel].self, from: data)
+                DispatchQueue.main.async {
+                    self.items = decodedData
+                    self.calculateTotal()
+                }
+            } catch {
+                self.errorMessage = error.localizedDescription
+            }
+        }.resume()
     }
     
-    func removeFromCart(item : ItemDataModel){ 
+    func deleteCartItem(ForItemID id: String) {
+        guard let url = URL(string: "http://localhost:3000/api/cart/\(id)") else {
+            self.errorMessage = "Invalid URL"
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let _ = data, error == nil else {
+                self.errorMessage = error?.localizedDescription ?? "Unknown error"
+                return
+            }
+            
+            
+            
+            DispatchQueue.main.async {
+                // Handle successful deletion if needed
+            }
+        }.resume()
+        
+    }
+    
+    func removeFromCart(item : CartDataModel){
         items = items.filter { $0.id != item.id }
-        total -= item.prod_price
+        calculateTotal()
     }
     
+    private func calculateTotal() {
+        var totalAmount: Double = 0.0
+        for item in items {
+            totalAmount += item.prod_price * Double(item.qty)
+        }
+        self.total = totalAmount
+    }
 }

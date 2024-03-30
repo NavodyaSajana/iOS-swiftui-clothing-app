@@ -20,7 +20,7 @@ struct ClothingCard : View {
     var userVM : UserViewModel
     
     var body: some View{
-        NavigationLink(destination: ItemDetailView(itemDM: itemDM)){
+        NavigationLink(destination: ItemDetailView(itemDM: itemDM,userID: userVM.username)){
             ZStack(alignment: .topTrailing){
                 ZStack(alignment: .bottom){
                     //image fetch using url
@@ -72,6 +72,7 @@ struct ClothingCard : View {
                         Button{
                             if userVM.authenticated{
                                 favVM.addToFavourites(item_id: "\(itemDM.id)", user_id: userVM.username)
+                                showAlert = false
                             } else {
                                 //show alert
                                 showAlert = true

@@ -65,7 +65,6 @@ struct FavouriteItemCard : View {
             Button(action: {
                 withAnimation{
                     favVM.deleteFavouriteItem(ForItemID: "\(itemDM.id)")
-                    //favVM.fetchFavouriteItems(forEmail: userVM.email)
                     favVM.removeFromFavourite(item: itemDM)
                 }
             }, label: {

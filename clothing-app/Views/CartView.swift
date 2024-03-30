@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct CartView: View {
-    @EnvironmentObject var cartVM : CartViewModel
+    //@EnvironmentObject var cartVM : CartViewModel
+    @StateObject var userVM : UserViewModel = UserViewModel()
+    @ObservedObject var cartVM = CartViewModel()
+    @State var total : Double = 0.00
     
     var body: some View {
         ZStack{
@@ -21,16 +24,33 @@ struct CartView: View {
                     //Spacer()
                     VStack{
                         List{
-                            if cartVM.items.count > 0 {
-                                ForEach(cartVM.items){
-                                    data in
-                                    CartItemCard(itemDM: data)
+                            if userVM.authenticated {
+                                if cartVM.items.isEmpty {
+                                    Text("Your favourites is Empty!")
+                                }else {
+                                    ForEach(cartVM.items){
+                                        data in
+                                        CartItemCard(cartDM: data, cartVM: cartVM)
+                                        //cartVM.calculateTotal(item: data)
+                                        //total += data.prod_price
+                                    }
                                 }
                             } else {
-                                Text("Your Cart is Empty")
+                                Text("Login to check your Favouries!")
+                            }
+                        }
+                        .onAppear{
+                            if userVM.authenticated{
+                                cartVM.fetchCartData(forEmail: userVM.username)
+                            }
+                        }
+                        .onSubmit {
+                            if userVM.authenticated{
+                                cartVM.fetchCartData(forEmail: userVM.username)
                             }
                         }
                         .frame(width: 370,height: 500)
+                        
                     }
                     Spacer()
                     
@@ -39,19 +59,19 @@ struct CartView: View {
                         HStack{
                             Text("Total")
                             Spacer()
-                            Text("\(cartVM.total, specifier: "%.2f") $")
+                            Text("$ \(cartVM.total, specifier: "%.2f")")
                         }
                         HStack{
                             Text("Discount")
                             Spacer()
-                            Text("0.00 $")
+                            Text("$ 0.00")
                         }
                         Spacer()
                         //1 Spacer()
                         HStack{
                             Text("Amount")
                             Spacer()
-                            Text("\(cartVM.total, specifier: "%.2f") $")
+                            Text("$ \(cartVM.total, specifier: "%.2f")")
                         }
                     }.padding(.horizontal,20)
                     Button{

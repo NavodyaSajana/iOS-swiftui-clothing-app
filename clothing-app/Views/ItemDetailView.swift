@@ -14,7 +14,10 @@ struct ItemDetailView: View {
     //@StateObject var userVM = UserViewModel()
     @StateObject var itemDetailsVM = ItemDetailViewModel()
     @State var getSelection : String = ""
+    @State var quantity : String = ""
+    @State private var showAlert = false
     var itemDM: ItemDataModel
+    var userID: String
     
     var body: some View {
         
@@ -77,6 +80,7 @@ struct ItemDetailView: View {
                     
                     
                     HStack{
+                        Spacer()
                         Button(action: {
                             getSelection = "XS"
                         }, label: {
@@ -127,10 +131,30 @@ struct ItemDetailView: View {
                                     Text("XL")
                                 }
                         })
+                        Spacer()
+                        TextField("Enter Quantity", text: $quantity)
+                            .font(.system(size: 14))
+                        Spacer()
                     }
-                    Spacer()
+                    if(itemDetailsVM.showSuccess){
+                        Text("Added to cart")
+                            .font(.system(size: 12))
+                            .foregroundStyle(.green)
+                    }
+                    
+                    if(itemDetailsVM.showError){
+                        Text("Unable to Add select color or quantity")
+                            .font(.system(size: 12))
+                            .foregroundStyle(.red)
+                    }
+                    
                     Button(action:{
-                        
+                        if userID.isEmpty || userID == "" {
+                            showAlert = true
+                        } else {
+                            itemDetailsVM.addToCart(itemID: "\(itemDM.id)", userID: userID, size: getSelection, qty: quantity)
+                            showAlert = false
+                        }
                     },label: {
                         HStack{
                             Text("ADD TO CART")
@@ -139,6 +163,12 @@ struct ItemDetailView: View {
                         .foregroundColor(.white)
                         .frame(width: UIScreen.main.bounds.width - 32,height:48)
                     })
+                    .alert(isPresented: $showAlert) {
+                        Alert(
+                            title: Text("Unable to Add to Cart"),
+                            message: Text("Make sure to login before add Favourites")
+                        )
+                    }
                     .background(Color(.systemBlue))
                     .cornerRadius(50)
                     .padding(.top,24)
