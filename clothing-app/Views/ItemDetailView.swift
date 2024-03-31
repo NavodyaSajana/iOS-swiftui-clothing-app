@@ -14,7 +14,7 @@ struct ItemDetailView: View {
     //@StateObject var userVM = UserViewModel()
     @StateObject var itemDetailsVM = ItemDetailViewModel()
     @State var getSelection : String = ""
-    @State var quantity : String = ""
+    @State var quantity : Int = 0
     @State private var showAlert = false
     var itemDM: ItemDataModel
     var userID: String
@@ -63,18 +63,18 @@ struct ItemDetailView: View {
                                 .padding()
                         }
                     }
-                        
-                        Spacer()
+                    
+                    Spacer()
                     Text(itemDM.prod_name)
                         .font(.title)
                         .font(.system(size: 12))
                     Text("$ \(itemDM.prod_price, specifier: "%.2f")")
-                        ScrollView{
-                            Text("This Item can be purchased from any of our stores. For returns call our team they will arrange you the relevants")
-                            //.frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        }
-                        .padding(.leading)
-                        .padding(.trailing)
+                    ScrollView{
+                        Text("This Item can be purchased from any of our stores. For returns call our team they will arrange you the relevants")
+                        //.frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    }
+                    .padding(.leading)
+                    .padding(.trailing)
                     
                     //Spacer()
                     
@@ -132,8 +132,12 @@ struct ItemDetailView: View {
                                 }
                         })
                         Spacer()
-                        TextField("Enter Quantity", text: $quantity)
-                            .font(.system(size: 14))
+                        //                        TextField("Enter Quantity", text: $quantity)
+                        //                            .font(.system(size: 14))
+                        Stepper(value: $quantity, in: 1...10) {
+                            Text("\(quantity)")
+                                .font(.system(size: 13))
+                        }
                         Spacer()
                     }
                     if(itemDetailsVM.showSuccess){
@@ -152,7 +156,7 @@ struct ItemDetailView: View {
                         if userID.isEmpty || userID == "" {
                             showAlert = true
                         } else {
-                            itemDetailsVM.addToCart(itemID: "\(itemDM.id)", userID: userID, size: getSelection, qty: quantity)
+                            itemDetailsVM.addToCart(itemID: "\(itemDM.id)", userID: userID, size: getSelection, qty: "\(quantity)")
                             showAlert = false
                         }
                     },label: {
