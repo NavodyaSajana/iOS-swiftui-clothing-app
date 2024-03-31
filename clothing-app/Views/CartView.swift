@@ -80,6 +80,10 @@ struct CartView: View {
                     Button{
                         cartVM.placeOrder(email: userVM.username, total: "\(cartVM.total)")
                         cartVM.deleteCartItems(forEmail: userVM.username)
+                        for data in cartVM.items {
+                            cartVM.placeOrderItem(order_id: 0, item_id: data.id, size: data.size, qty: data.qty)
+                            cartVM.removeFromCart(item: data)
+                        }
                     } label: {
                         HStack{
                             Text("CHECKOUT")
@@ -113,11 +117,11 @@ struct CartView: View {
                 Spacer()
             }
         }
-        .onTapGesture {
-            if userVM.authenticated{
-                cartVM.fetchCartData(forEmail: userVM.username)
-            }
-        }
+//        .onTapGesture {
+//            if userVM.authenticated{
+//                cartVM.fetchCartData(forEmail: userVM.username)
+//            }
+//        }
     }
 }
 

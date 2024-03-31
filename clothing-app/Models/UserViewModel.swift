@@ -12,12 +12,14 @@ import SwiftUI
 class UserViewModel : ObservableObject{
     @Published var users: [UserDataModel] = []
     @Published var user: UserDataModel?
-//    @Published var authenticated = false
-//    @Published var username = ""
-    @AppStorage("AUTH_KEY") var authenticated = false{
-        willSet {objectWillChange.send()}
-    }
-    @AppStorage("USER_KEY") var username = ""
+    //    @Published var authenticated = false
+    //    @Published var username = ""
+        @AppStorage("AUTH_KEY") var authenticated = false{
+            willSet {objectWillChange.send()}
+        }
+    //    @AppStorage("USER_KEY") var username = ""
+    //@AppStorage ("AUTH_KEY") var authenticated = false
+    @AppStorage ("USER_KEY") var username = ""
     
     @Published var password : String = ""
     @Published var showError : Bool = false
@@ -30,12 +32,7 @@ class UserViewModel : ObservableObject{
         self.email = ""
         self.user = nil
         self.username = ""
-        authenticated = false
-        //username = ""
-        //authenticated = false
-//        withAnimation{
-//            authenticated.toggle()
-//        }
+        self.authenticated = false
     }
     
     func login(email: String, password: String) {

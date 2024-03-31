@@ -83,7 +83,7 @@ struct CartItemCard : View {
                     cartVM.removeFromCart(item: cartDM)
                 }
             }, label: {
-                Text("Remove")
+                Text("Delete")
             }).tint(.red)
         })
         

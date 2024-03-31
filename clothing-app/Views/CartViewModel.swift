@@ -15,6 +15,7 @@ class CartViewModel : ObservableObject {
     @Published var cartCount: Int = 0
     @Published var showError: Bool = false
     @Published var showSuccess: Bool = false
+    @State var intValue: Int? = nil
     
     func fetchCartData(forEmail email: String) {
         guard let url = URL(string: "http://localhost:3000/api/cart/\(email)") else {
@@ -109,18 +110,17 @@ class CartViewModel : ObservableObject {
                 
             }
         }.resume()
-        self.addItems()
     }
     
-    func addOrderItems(item_id: Int,size: String,qty: Int){
+    func placeOrderItem(order_id: Int,item_id: Int,size: String, qty: Int){
         guard let url = URL(string: "http://localhost:3000/api/order/add-items") else {
             print("Invalid URL")
             return
         }
-        let itemData = PurchaseDataModel(item_id: item_id, size: size, qty: qty)
-        guard let jsonData = try? JSONEncoder().encode(itemData) else {
+        let orderData = OrderItemDataModel(order_id: order_id, item_id: Int(item_id), size: size, qty: qty)
+        guard let jsonData = try? JSONEncoder().encode(orderData) else {
             self.showError = true
-            self.errorMessage = "Failed to encode item data"
+            self.errorMessage = "Failed to encode order data"
             return
         }
         
@@ -170,9 +170,4 @@ class CartViewModel : ObservableObject {
         }.resume()
     }
     
-    func addItems(){
-        for item in self.items {
-            //self.addOrderItems(item_id: item.id, size: item.size, qty: item.qty)
-        }
-    }
 }

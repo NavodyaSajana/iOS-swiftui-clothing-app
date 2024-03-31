@@ -126,7 +126,7 @@ struct HomeView: View {
                             ForEach(itemVM.itemDM){
                                 cloth in
                                 ClothingCard(itemDM: cloth,favVM: favVM, userVM: userVM)
-                                        .environmentObject(cartVM)
+                                        //.environmentObject(cartVM)
                             }
                         }
                     }

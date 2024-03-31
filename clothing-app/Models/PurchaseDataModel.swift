@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct PurchaseDataModel: Codable {
-    var item_id: Int
-    var size: String
-    var qty: Int
+struct PurchaseDataModel: Codable, Identifiable {
+    var id: Int
+    var email: String
+    var total: String
+    var order_date: String
 }

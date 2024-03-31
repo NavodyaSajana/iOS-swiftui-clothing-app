@@ -50,15 +50,7 @@ struct UserView: View {
                                     }
                                 }
                                 
-                                Section("Delivery Address"){
-                                    
-                                    VStack(alignment: .leading,spacing: 4){
-                                        Text("Address Number")
-                                        Text("Address Line 1")
-                                        Text("Address Line 2")
-                                        Text("Address City")
-                                    }
-                                }
+                                
                                 
                                 Section("Settings"){
                                     VStack(alignment: .center,

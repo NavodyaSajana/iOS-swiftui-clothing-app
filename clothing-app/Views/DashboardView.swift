@@ -19,9 +19,9 @@ struct DashboardView: View {
                     .tabItem {
                         Label("Favourites",systemImage: "heart")
                     }
-                NotificationView()
+                PurchaseView()
                     .tabItem {
-                        Label("Notifications",systemImage: "bell")
+                        Label("Orders",systemImage: "list.clipboard")
                     }
                 UserView()
                     .tabItem {
